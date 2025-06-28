@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Moon, Mail, Download, Github, LinkedinIcon, Instagram, ChevronUp, ChevronDown, ArrowUp, ExternalLink, Award, Languages, BookOpen, Briefcase, GraduationCap, Code, User, Phone, MapPin, Calendar, Cpu, Home, Camera, PenTool } from "lucide-react";
+import { Moon, Mail, Download, Github, LinkedinIcon, Instagram, ChevronUp, ChevronDown, ArrowUp, ExternalLink, Award, Languages, BookOpen, Briefcase, GraduationCap, Code, User, Phone, MapPin, Calendar, Cpu, Home, Camera, PenTool, FileText } from "lucide-react";
 import { FlipCard } from '@/components/FlipCard';
 import { useToast } from "@/hooks/use-toast";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -122,56 +122,108 @@ const Index = () => {
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
+  // const skillCategories = {
+  //   "Languages": [
+  //     { name: "Python", experience: "5+ years", useCase: "ML/AI development, data analysis" },
+  //     { name: "SQL", experience: "3 years", useCase: "Performance-critical applications" },
+  //     { name: "Java", experience: "2 years", useCase: "Enterprise applications" },
+  //     { name: "MATLAB", experience: "4 years", useCase: "Scientific computing, simulations" }
+  //   ],
+  //   "AI/ML Tools": [
+  //     { name: "PyTorch", experience: "3 years", useCase: "Deep learning research" },
+  //     { name: "TensorFlow", experience: "2 years", useCase: "Production ML models" },
+  //     { name: "Scikit-learn", experience: "4 years", useCase: "Classical ML algorithms" },
+  //     { name: "Keras", experience: "2 years", useCase: "Rapid prototyping" }
+  //   ],
+  //   "Frameworks": [
+  //     { name: "LangChain", experience: "1 year", useCase: "LLM applications" },
+  //     { name: "LlamaIndex", experience: "1 year", useCase: "RAG systems" },
+  //     { name: "OpenCV", experience: "3 years", useCase: "Computer vision" },
+  //     { name: "Pandas", experience: "4 years", useCase: "Data manipulation" }
+  //   ],
+  //   "Tools": [
+  //     { name: "Docker", experience: "2 years", useCase: "Containerization" },
+  //     { name: "MySQL", experience: "3 years", useCase: "Database management" },
+  //     { name: "Git", experience: "5 years", useCase: "Version control" },
+  //     { name: "Excel VBA", experience: "4 years", useCase: "Automation & analysis" }
+  //   ],
+  //   "Design & Simulation Tools": [
+  //     { name: "CADMATIC", experience: "3+ years", useCase: "3D ship modeling & engineering design" },
+  //     { name: "AutoCAD", experience: "5+ years", useCase: "2D technical drawings & drafting" },
+  //     { name: "Ansys", experience: "2 years", useCase: "FEA & structural analysis" },
+  //     { name: "QGIS", experience: "1 year", useCase: "Geospatial analysis & mapping" },
+  //     { name: "AnyLogic", experience: "1 year", useCase: "Multi-method modeling & simulation" },
+  //     { name: "Siemens NX", experience: "1 year", useCase: "Advanced CAD & product design" }
+  //   ],
+  //   "Naval Architecture Tools": [
+  //     { name: "Maxsurf Modeller", experience: "2 years", useCase: "Hull form design & modeling" },
+  //     { name: "Maxsurf Resistance", experience: "2 years", useCase: "Resistance analysis & performance" },
+  //     { name: "Rhino", experience: "1 year", useCase: "3D surface modeling & design" },
+  //     { name: "NAPA Stability", experience: "1 year", useCase: "Ship stability calculations" }
+  //   ]
+  // };
+
   const skillCategories = {
-    "Languages": [
-      { name: "Python", experience: "5+ years", useCase: "ML/AI development, data analysis" },
-      { name: "C++", experience: "3 years", useCase: "Performance-critical applications" },
-      { name: "Java", experience: "2 years", useCase: "Enterprise applications" },
-      { name: "MATLAB", experience: "4 years", useCase: "Scientific computing, simulations" }
-    ],
+  "Languages": [
+    { name: "Java", experience: "2+ years", useCase: "Enterprise backend development" },
+    { name: "Python", experience: "1.5 years", useCase: "Scripting and automation" },
+    { name: "SQL", experience: "1.5 years", useCase: "Database queries and management" }
+  ],
+  "Technologies & Frameworks": [
+    { name: "Spring Boot", experience: "2 years", useCase: "Java-based backend development" },
+    { name: "REST API / Spring REST", experience: "2 years", useCase: "Web services and API design" },
+    { name: "Microservices", experience: "1.5 years", useCase: "Scalable backend architecture" },
+    { name: "HTML5/CSS/Bootstrap", experience: "1.5 years", useCase: "Frontend development and styling" },
+    { name: "XML", experience: "1.5 years", useCase: "Data representation and API communication" }
+  ],
+  "Tools": [
+    { name: "VS Code", experience: "1.5 years", useCase: "Code editing" },
+    { name: "IntelliJ IDEA", experience: "2 years", useCase: "Java development" },
+    { name: "PyCharm", experience: "1 year", useCase: "Python scripting and debugging" },
+    { name: "Postman", experience: "1.5 years", useCase: "API testing" },
+    { name: "Swagger", experience: "1 year", useCase: "API documentation" },
+    { name: "GitHub", experience: "2 years", useCase: "Version control and collaboration" },
+    { name: "Docker", experience: "1 year", useCase: "Containerization and deployment" },
+    { name: "Jira", experience: "2 years", useCase: "Agile project management" },
+    { name: "Excel / MS Office", experience: "3+ years", useCase: "Data handling and documentation" },
+    { name: "Blender", experience: "Basic", useCase: "3D modeling (exploratory)" }
+  ],
+  "Development Practices": [
+    { name: "Agile", experience: "2 years", useCase: "Team collaboration and iterative delivery" },
+    { name: "Software Testing", experience: "1 year", useCase: "Ensuring code quality and reliability" }
+  ],
     "AI/ML Tools": [
-      { name: "PyTorch", experience: "3 years", useCase: "Deep learning research" },
-      { name: "TensorFlow", experience: "2 years", useCase: "Production ML models" },
-      { name: "Scikit-learn", experience: "4 years", useCase: "Classical ML algorithms" },
-      { name: "Keras", experience: "2 years", useCase: "Rapid prototyping" }
-    ],
-    "Frameworks": [
-      { name: "LangChain", experience: "1 year", useCase: "LLM applications" },
-      { name: "LlamaIndex", experience: "1 year", useCase: "RAG systems" },
-      { name: "OpenCV", experience: "3 years", useCase: "Computer vision" },
-      { name: "Pandas", experience: "4 years", useCase: "Data manipulation" }
-    ],
-    "Tools": [
-      { name: "Docker", experience: "2 years", useCase: "Containerization" },
-      { name: "MySQL", experience: "3 years", useCase: "Database management" },
-      { name: "Git", experience: "5 years", useCase: "Version control" },
-      { name: "Excel VBA", experience: "4 years", useCase: "Automation & analysis" }
-    ],
-    "Design & Simulation Tools": [
-      { name: "CADMATIC", experience: "3+ years", useCase: "3D ship modeling & engineering design" },
-      { name: "AutoCAD", experience: "5+ years", useCase: "2D technical drawings & drafting" },
-      { name: "Ansys", experience: "2 years", useCase: "FEA & structural analysis" },
-      { name: "QGIS", experience: "1 year", useCase: "Geospatial analysis & mapping" },
-      { name: "AnyLogic", experience: "1 year", useCase: "Multi-method modeling & simulation" },
-      { name: "Siemens NX", experience: "1 year", useCase: "Advanced CAD & product design" }
-    ],
-    "Naval Architecture Tools": [
-      { name: "Maxsurf Modeller", experience: "2 years", useCase: "Hull form design & modeling" },
-      { name: "Maxsurf Resistance", experience: "2 years", useCase: "Resistance analysis & performance" },
-      { name: "Rhino", experience: "1 year", useCase: "3D surface modeling & design" },
-      { name: "NAPA Stability", experience: "1 year", useCase: "Ship stability calculations" }
-    ]
-  };
+    { name: "PyTorch", experience: "3 years", useCase: "Deep learning research" },
+    { name: "TensorFlow", experience: "2 years", useCase: "Production ML models" },
+    { name: "Scikit-learn", experience: "4 years", useCase: "Classical ML algorithms" },
+    { name: "Keras", experience: "2 years", useCase: "Rapid prototyping" }
+  ],
+  "NLP & Thesis-related Tools": [
+    { name: "BERT, DistilBERT, RoBERTa", experience: "1 year", useCase: "Argument classification & fine-tuning" },
+    { name: "LoRA", experience: "1 year", useCase: "Parameter-efficient fine-tuning of LLMs" },
+    { name: "Ensemble Learning", experience: "1 year", useCase: "Model combination for improved classification" },
+    { name: "LLaMA", experience: "0.5 year", useCase: "Open-source LLM experimentation" },
+    { name: "Mistral", experience: "0.5 year", useCase: "Efficient LLM-based reasoning" },
+    { name: "GPT-4o", experience: "0.5 year", useCase: "Evaluation and hybrid model analysis" }
+  ]
+
+  // "Soft Skills": [
+  //   { name: "Problem Solving", experience: "Strong", useCase: "Debugging and analytical thinking" },
+  //   { name: "Communication", experience: "Strong", useCase: "Team discussions and documentation" },
+  //   { name: "Team Collaboration", experience: "Strong", useCase: "Working in Agile environments" },
+  //   { name: "Analytical Skills", experience: "Strong", useCase: "Systematic thinking and logic building" }
+  // ]
+};
 
   const softSkills = ["Technical Communication", "Interdisciplinary Collaboration", "Scientific Writing", "Team Leadership", "Problem Solving"];
 
   const projects = [
     {
-      title: "Interactive Argument Completion Tool",
-      description: "NLP + LLM + RAG interface for intelligent argument completion using Python, LangChain, ChromaDB, and OpenAI/Ollama models.",
-      technologies: ["Python", "LangChain", "RAG", "ChromaDB", "OpenAI"],
-      github: "https://github.com/Midhun-Kanadan/Interactive-Argument-Completion-Tool",
-      demo: null
+    title: "From Schemes to Fallacies: A Deep Dive into Argument Classification",
+    description: "A research-driven project focused on classifying argument schemes and detecting fallacies using transformer models and LLMs. It combines fine-tuning, LoRA, prompting, and ensemble learning to improve reasoning detection in persuasive texts.",
+    technologies: ["Python", "LoRA", "Ensemble Learning", "BERT", "LLaMA", "Mistral", "GPT-4o"],
+    github: "https://github.com/Midhun-Kanadan/Interactive-Argument-Completion-Tool",
+    demo: null
     },
     {
       title: "Machine Learning Models for Topology Optimization",
@@ -223,7 +275,7 @@ const Index = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="font-bold text-xl hover:text-portfolio-primary transition-colors duration-200 cursor-pointer"
             >
-              Midhun Kanadan
+              Isabel Maria Binu
             </button>
             <div className="flex items-center space-x-4">
               <Button
@@ -250,38 +302,35 @@ const Index = () => {
               <div className="relative animate-fade-in" style={{animationDelay: '200ms'}}>
                 <div className="relative p-1 rounded-full bg-gradient-to-br from-portfolio-primary/20 via-portfolio-secondary/10 to-portfolio-primary/20 shadow-2xl hover-glow">
                   <img 
-                    src="/lovable-uploads/36d0e1a2-50e9-434d-a160-af0e5184e22b.png" 
-                    alt="Midhun Kanadan" 
+                    // src="/lovable-uploads/isabel-profile1.png" 
+                    src="/lovable-uploads/isabel-profile.jpg" 
+                    alt="Isabel Maria Binu" 
                     className="w-56 h-56 rounded-full object-cover border border-white/20 shadow-xl interactive-card hover:shadow-portfolio-primary/30"
                   />
                 </div>
               </div>
               <div className="text-center md:text-left animate-slide-right" style={{animationDelay: '400ms'}}>
                 <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gradient">
-                  Midhun Kanadan
+                  Isabel Maria Binu
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground mb-2">
-                  AI Researcher | Naval Architect | Design Engineer
+                  AI Engineer | Creative Thinker | Problem Solver
                 </p>
                 <p className="text-sm text-muted-foreground mb-4 italic">
-                  Passionate about bridging design, engineering, and AI | Building intelligent systems with purpose
+                  Blending technical precision with creative insight to craft impactful digital solutions
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-1 inline-flex items-center gap-1 mb-6">
                   <GraduationCap className="h-4 w-4 text-gray-700 dark:text-gray-300" />
                   <span className="text-sm text-gray-700 dark:text-gray-300 font-medium tracking-normal">
-                    Wissenschaftlicher Mitarbeiter @{" "}
+                    Professional at{" "}
                     <a 
-                      href="https://www.uni-weimar.de/en/media/chairs/computer-science-department/webis/people/#kanadan"
+                      href="#"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 font-medium hover:text-blue-700 transition-colors"
                     >
-                      Webis Group
+                      Current Organization
                     </a>
-                    , {" "}
-                    <span className="text-indigo-500 font-medium hover:text-indigo-600 transition-colors">
-                      Bauhaus-Universität Weimar
-                    </span>
                   </span>
                 </div>
                 <div className="flex justify-center md:justify-start gap-6 mt-6">
@@ -289,7 +338,7 @@ const Index = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a 
-                          href="mailto:midhun.kunhikannan@gmail.com"
+                          href="mailto:isabelmariavadakkedathu@gmail.com"
                           className="flex items-center justify-center w-12 h-12 rounded-full bg-muted hover:bg-[#D44638] hover:text-white btn-enhanced hover-glow shadow-sm transition-all duration-300"
                           aria-label="Send email"
                         >
@@ -325,7 +374,7 @@ const Index = () => {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <a 
-                          href="https://www.linkedin.com/in/midhunkanadan/"
+                          href="https://www.linkedin.com/in/isabel-maria-binu/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center justify-center w-12 h-12 rounded-full bg-muted hover:bg-[#0077B5] hover:text-white btn-enhanced hover-glow shadow-sm transition-all duration-300"
@@ -340,22 +389,6 @@ const Index = () => {
                     </Tooltip>
                   </TooltipProvider>
 
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button 
-                          onClick={() => document.getElementById('photography-section')?.scrollIntoView({ behavior: 'smooth' })}
-                          className="flex items-center justify-center w-12 h-12 rounded-full bg-muted hover:bg-gradient-to-r hover:from-pink-500 hover:to-red-500 hover:text-white btn-enhanced hover-glow shadow-sm transition-all duration-300"
-                          aria-label="Jump to Photography Portfolio"
-                        >
-                          <Instagram className="h-5 w-5" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Photography Portfolio</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
                 </div>
               </div>
             </div>
@@ -378,10 +411,10 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-foreground mb-4">
-                    I'm Midhun Kanadan, a research associate (<strong>Wissenschaftlicher Mitarbeiter</strong>) at the <strong>Webis Group, Bauhaus-Universität Weimar</strong>. My research focuses on AI-driven solutions for <strong>argument mining</strong>, <strong>critical question generation</strong>, and <strong>multi-modal information extraction</strong>.
+                    I'm Isabel Maria Binu, a Master's student in Digital Engineering at Bauhaus-Universität Weimar with a passion for bridging academic research and practical software engineering. With nearly 3 years of experience as a backend developer at Infosys, I specialized in building robust Java-based systems using Spring Boot, JUnit, Maven, and more.
                   </p>
                   <p className="text-foreground mb-4">
-                    With a strong academic background in <strong>Digital Engineering</strong> and a dual master's degree in <strong>Naval Architecture</strong>, I bridge practical engineering experience with advanced AI research. I've worked on <strong>LLM fine-tuning</strong>, <strong>Retrieval-Augmented Generation (RAG)</strong>, and mobile deployment of vision-based systems.
+                    I thrive at the intersection of clean code, system design, and scalable architectures. Whether tackling production systems or leading NLP-based thesis research on argument classification, I enjoy transforming complex challenges into thoughtful, efficient solutions.
                   </p>
                   <Collapsible open={expandedStory} onOpenChange={setExpandedStory}>
                     <CollapsibleTrigger asChild>
@@ -394,7 +427,7 @@ const Index = () => {
                     </CollapsibleTrigger>
                     <CollapsibleContent className="mt-4">
                       <p className="text-foreground mb-4">
-                        My journey began as a <strong>Naval Architect</strong> at <strong>Larsen & Toubro Shipbuilding</strong>, where I developed detailed design and construction drawings for defense vessels, gaining hands-on experience in both design and production processes. Today, I apply that structured problem-solving mindset to AI systems in research.
+                        Starting with a background in civil engineering, I transitioned into digital systems out of a curiosity to build smarter, more adaptive technology. My academic path has been a continuous evolution—guided by interdisciplinary thinking, ethical design, and a drive to understand the systems I create at both technical and human levels.
                       </p>
                       <blockquote className="text-portfolio-primary font-medium italic border-l-4 border-portfolio-primary pl-4">
                         "What I cannot create, I do not understand." – Richard Feynman
@@ -410,46 +443,50 @@ const Index = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
+                    <Briefcase className="h-4 w-4 text-portfolio-primary" />
+                    <span>Senior System Engineer at Infosys Limited (Nov 2019 - Sep 2022)</span>
+                  </div>
+                  <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
+                    <BookOpen className="h-4 w-4 text-portfolio-primary" />
+                    <span>Bachelor's at Muthoot Institute of Technology and Science (2015 - 2019)</span>
+                  </div>
+                  <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
                     <MapPin className="h-4 w-4 text-portfolio-primary" />
                     <span>Weimar, Germany</span>
                   </div>
                   <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
                     <Mail className="h-4 w-4 text-portfolio-primary" />
-                    <span>midhun.kunhikannan@gmail.com</span>
+                    <span>isabel.maria.binu@example.com</span>
                   </div>
                   <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
                     <Phone className="h-4 w-4 text-portfolio-primary" />
-                    <span>+49-17634462763</span>
+                    <span>+49-17646111026</span>
                   </div>
                   <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
                     <GraduationCap className="h-4 w-4 text-portfolio-primary" />
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <span className="cursor-help">Dual Master's Degree (Erasmus Mundus) + Master's in Digital Engineering + B.Tech</span>
+                          <span className="cursor-help">Master's in Digital Engineering + B.Tech</span>
                         </TooltipTrigger>
                         <TooltipContent>
                           <div className="text-sm max-w-xs">
                             <p className="font-medium">Education Details:</p>
-                            <p>• Dual Master's: Erasmus Mundus joint degree (University of Rostock & University of Liège)</p>
                             <p>• Master's in Digital Engineering (Bauhaus-Universität Weimar)</p>
-                            <p>• B.Tech in Naval Architecture</p>
+                            <p>• B.Tech in Civil Engineering</p>
                           </div>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   </div>
-                  <div className="flex items-center gap-2 hover:text-portfolio-primary transition-colors duration-200">
-                    <Briefcase className="h-4 w-4 text-portfolio-primary" />
-                    <span>Research Associate at Webis Group</span>
-                  </div>
+
                 </CardContent>
               </AnimatedCard>
             </div>
           </div>
         </AnimatedSection>
 
-        {/* Current Role Highlight */}
+        {/* Current Role Highlight
         <AnimatedSection className="py-12 px-4" animation="slide-left">
           <div className="container mx-auto">
             <AnimatedCard className="max-w-4xl mx-auto border-l-4 border-l-portfolio-primary bg-gradient-to-r from-portfolio-primary/5 to-transparent shadow-lg rounded-xl" hoverEffect="glow">
@@ -479,7 +516,42 @@ const Index = () => {
               </CardContent>
             </AnimatedCard>
           </div>
+        </AnimatedSection> */}
+        {/* Master's Thesis Highlight */}
+        <AnimatedSection className="py-12 px-4" animation="slide-left">
+          <div className="container mx-auto">
+            <AnimatedCard className="max-w-4xl mx-auto border-l-4 border-l-portfolio-primary bg-gradient-to-r from-portfolio-primary/5 to-transparent shadow-lg rounded-xl" hoverEffect="glow">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-portfolio-primary p-3 rounded-full hover:scale-110 transition-transform duration-300 hover:bg-portfolio-primary-dark">
+                    <FileText className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground font-medium">Master’s Thesis</p>
+                    <h3 className="text-lg font-semibold">
+                      From Schemes to Fallacies: A Deep Dive into Argument Classification
+                    </h3>
+                    <p className="mt-1 text-muted-foreground">
+                      A research-driven exploration of classifying argument schemes and detecting fallacies in persuasive texts using fine-tuned BERT variants, LLaMA, Mistral, GPT-4o, and ensemble learning. This work bridges NLP, logic, and explainability through hybrid model design and prompting strategies.
+                    </p>
+                    <span className="inline-block mt-2">
+                      <a 
+                        href="https://github.com/Midhun-Kanadan/Interactive-Argument-Completion-Tool" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-portfolio-primary hover:underline inline-flex items-center gap-1 hover:text-portfolio-primary-dark transition-colors duration-200"
+                      >
+                        View Project Repository
+                        <ExternalLink className="h-3 w-3 transition-transform duration-200 hover:scale-110" />
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </AnimatedCard>
+          </div>
         </AnimatedSection>
+
 
         {/* Featured Projects */}
         <AnimatedSection id="projects" className="py-16 px-4 pb-16 md:pb-8 bg-white dark:bg-gray-900" animation="fade-up">
@@ -559,14 +631,14 @@ const Index = () => {
                     tagBg: "bg-blue-50 hover:bg-blue-500 hover:text-white border-blue-200 dark:bg-blue-500/20 dark:hover:bg-blue-500 dark:border-blue-500/30",
                     tagText: "text-blue-700 dark:text-blue-300"
                   },
-                  "AI/ML Tools": {
+                  "Technologies & Frameworks": {
                     cardBg: "bg-card border-border",
                     titleColor: "text-foreground hover:text-portfolio-primary", 
                     dotColor: "bg-emerald-500",
                     tagBg: "bg-emerald-50 hover:bg-emerald-500 hover:text-white border-emerald-200 dark:bg-emerald-500/20 dark:hover:bg-emerald-500 dark:border-emerald-500/30",
                     tagText: "text-emerald-700 dark:text-emerald-300"
                   },
-                  "Frameworks": {
+                  "Development Practices": {
                     cardBg: "bg-card border-border",
                     titleColor: "text-foreground hover:text-portfolio-primary",
                     dotColor: "bg-indigo-500", 
@@ -580,14 +652,14 @@ const Index = () => {
                     tagBg: "bg-amber-50 hover:bg-amber-500 hover:text-white border-amber-200 dark:bg-amber-500/20 dark:hover:bg-amber-500 dark:border-amber-500/30", 
                     tagText: "text-amber-700 dark:text-amber-300"
                   },
-                  "Design & Simulation Tools": {
+                  "NLP & Thesis-related Tools": {
                     cardBg: "bg-card border-border",
                     titleColor: "text-foreground hover:text-portfolio-primary",
                     dotColor: "bg-rose-500",
                     tagBg: "bg-rose-50 hover:bg-rose-500 hover:text-white border-rose-200 dark:bg-rose-500/20 dark:hover:bg-rose-500 dark:border-rose-500/30",
                     tagText: "text-rose-700 dark:text-rose-300"
                   },
-                  "Naval Architecture Tools": {
+                  "AI/ML Tools": {
                     cardBg: "bg-card border-border",
                     titleColor: "text-foreground hover:text-portfolio-primary",
                     dotColor: "bg-cyan-500",
@@ -666,76 +738,6 @@ const Index = () => {
             </h2>
             <div className="space-y-6 max-w-4xl mx-auto">
               
-              {/* Current Position */}
-              <AnimatedCard className="border-l-4 border-l-portfolio-primary" hoverEffect="glow" delay={100}>
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-110 transition-transform duration-300">
-                      <img 
-                        src="/lovable-uploads/f506dd4e-c663-4503-99a8-2f7a850409fb.png" 
-                        alt="Friedrich Schiller University Jena logo"
-                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg hover:text-portfolio-primary transition-colors duration-200">Wissenschaftlicher Mitarbeiter (Research Associate)</h3>
-                          <p className="text-portfolio-primary font-medium">Friedrich Schiller University Jena – Webis Group</p>
-                          <p className="text-muted-foreground">Mar 2025 – Present · Jena, Germany</p>
-                        </div>
-                        <Badge className="bg-green-500 animate-pulse-soft">Current</Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li className="hover:text-foreground transition-colors duration-200">Axiomatic Argumentative Re-ranking (Fairness)</li>
-                    <li className="hover:text-foreground transition-colors duration-200">Object/Aspect Linking and Clustering Relevant Passages</li>
-                    <li className="hover:text-foreground transition-colors duration-200">Answer Generation and Argument Summarization</li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline" className="hover:bg-portfolio-primary hover:text-white transition-all duration-200 hover:scale-105">AI Research</Badge>
-                    <Badge variant="outline" className="hover:bg-portfolio-primary hover:text-white transition-all duration-200 hover:scale-105">Argument Mining</Badge>
-                    <Badge variant="outline" className="hover:bg-portfolio-primary hover:text-white transition-all duration-200 hover:scale-105">NLP</Badge>
-                  </div>
-                </CardContent>
-              </AnimatedCard>
-
-              {/* MFPA Weimar */}
-              <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src="/lovable-uploads/509629bb-4a0a-44cf-9bf9-6c38da0490c7.png" 
-                        alt="MFPA Weimar logo"
-                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg">Student Research Assistant</h3>
-                          <p className="text-portfolio-primary">MFPA Weimar</p>
-                          <p className="text-muted-foreground">Sep 2024 – Feb 2025</p>
-                        </div>
-                        <Badge variant="outline">2024-2025</Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Built image segmentation pipelines using deep learning</li>
-                    <li>Trained YOLO models on lighting-varied datasets</li>
-                    <li>Developed Android app for mobile image classification</li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline">YOLO</Badge>
-                    <Badge variant="outline">Android</Badge>
-                    <Badge variant="outline">Image Segmentation</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-
               {/* Bauhaus University Research Positions */}
               <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
                 <CardContent className="pt-6">
@@ -755,153 +757,89 @@ const Index = () => {
                   
                   <div className="space-y-4">
                     <div className="border-l-2 border-l-portfolio-secondary pl-4">
-                      <h4 className="font-medium">IR Anthology Project</h4>
+                      <h4 className="font-medium">Computer Vision  Project</h4>
                       <p className="text-muted-foreground text-sm">Apr 2024 – Feb 2025</p>
                       <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 mt-2">
-                        <li>Rebuilding IR-Anthology using Python + LLMs</li>
-                        <li>Extracting and indexing multimodal content (text, images, tables)</li>
+                        <li>Annotation of Images using Computer Vision Annotation Tool (CVAT)</li>
                       </ul>
                     </div>
                     
-                    <div className="border-l-2 border-l-portfolio-secondary pl-4">
-                      <h4 className="font-medium">Vertikka-2 Project (Dept. of Building Physics)</h4>
-                      <p className="text-muted-foreground text-sm">Nov 2023 – Feb 2025</p>
-                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 mt-2">
-                        <li>Developed automated scripts (Python/C++)</li>
-                        <li>Contributed to sustainable building simulations</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="border-l-2 border-l-portfolio-secondary pl-4">
-                      <h4 className="font-medium">Machine Learning Teaching Assistant</h4>
-                      <p className="text-muted-foreground text-sm">Oct 2023 – Mar 2024</p>
-                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 mt-2">
-                        <li>Guided students in theory, assignments, and implementation for the Machine Learning course.</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="border-l-2 border-l-portfolio-secondary pl-4">
-                      <h4 className="font-medium">Topology Optimization (Matlab + Deep Learning)</h4>
-                      <p className="text-muted-foreground text-sm">May 2023 – Jul 2023 & Dec 2023 – Feb 2024</p>
-                      <ul className="list-disc list-inside text-muted-foreground text-sm space-y-1 mt-2">
-                        <li>Built deep learning models to predict structural configurations</li>
-                        <li>Created interactive Matlab apps</li>
-                      </ul>
-                    </div>
+                  
                   </div>
                   
                   <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline">Computer Vision</Badge>
+                    <Badge variant="outline">CVAT</Badge>
+                    <Badge variant="outline">Annotation</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+
+              {/* Infosys Limited */}
+              <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-105 transition-transform duration-300">
+                      <img 
+                        src="/lovable-uploads/Infosys_Technologies_logo.svg.png" 
+                        alt="Infosys logo"
+                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <h3 className="font-semibold text-lg">Senior Systems Engineer</h3>
+                          <p className="text-portfolio-primary">Infosys Limited</p>
+                          <p className="text-muted-foreground">Nov 2019 – Sept 2022 · Chennai, India</p>
+                        </div>
+                        <Badge variant="outline">2019–2022</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Senior Systems Engineer */}
+                  <h4 className="font-medium text-md mt-2">Senior Systems Engineer (Jan 2022 – Sep 2022)</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>Enhanced a Java REST-based application for stock market and event validation, improving customer experience.</li>
+                    <li>Developed complex SQL queries on Oracle for robust data handling.</li>
+                    <li>Followed Scrum methodology to deliver high-quality code in iterative cycles.</li>
+                    <li>Proactively resolved critical defects to ensure performance and stability.</li>
+                  </ul>
+
+                  {/* Systems Engineer */}
+                  <h4 className="font-medium text-md mt-4">Systems Engineer (Apr 2020 – Dec 2021)</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>Migrated a legacy COBOL system to Java Spring Boot, improving maintainability and performance.</li>
+                    <li>Achieved 60% code refactoring without loss in functionality, using OOP principles.</li>
+                    <li>Implemented JSON-based outputs using timestamps for enhanced readability.</li>
+                    <li>Built a microservice for trade matching with Neo4j, deployed on AWS cloud.</li>
+                    <li>Designed Zeebe workflows for complex business logic using Neo4j and AWS.</li>
+                  </ul>
+
+                  {/* Systems Engineer Trainee */}
+                  <h4 className="font-medium text-md mt-4">Systems Engineer Trainee (Nov 2019 – Mar 2020)</h4>
+                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                    <li>Gained proficiency in Python, SQL, and full-stack development with Java and Angular.</li>
+                    <li>Developed a full-stack shopping application as part of training program deliverables.</li>
+                  </ul>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Badge variant="outline">Java</Badge>
+                    <Badge variant="outline">Spring Boot</Badge>
+                    <Badge variant="outline">SQL</Badge>
+                    <Badge variant="outline">Oracle</Badge>
+                    <Badge variant="outline">Neo4j</Badge>
+                    <Badge variant="outline">Zeebe</Badge>
+                    <Badge variant="outline">AWS</Badge>
+                    <Badge variant="outline">Angular</Badge>
                     <Badge variant="outline">Python</Badge>
-                    <Badge variant="outline">LLMs</Badge>
-                    <Badge variant="outline">C++</Badge>
-                    <Badge variant="outline">MATLAB</Badge>
-                    <Badge variant="outline">Teaching</Badge>
+                    <Badge variant="outline">Scrum</Badge>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* MV Werften */}
-              <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src="/lovable-uploads/d05392e5-cdd6-43d4-9183-a785b7335875.png" 
-                        alt="MV Werften logo"
-                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg">Student Intern</h3>
-                          <p className="text-portfolio-primary">MV Werften</p>
-                          <p className="text-muted-foreground">Mar 2020 – Jul 2020 · Rostock</p>
-                        </div>
-                        <Badge variant="outline">2020</Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Performed ANSYS-based buckling analysis on cruise ship structures</li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline">ANSYS</Badge>
-                    <Badge variant="outline">Structural Analysis</Badge>
-                    <Badge variant="outline">Naval Architecture</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* L&T Shipbuilding */}
-              <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src="/lovable-uploads/264a98f3-8da2-43de-97d1-7d3fe2f8d9c6.png" 
-                        alt="Larsen & Toubro logo"
-                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg">Senior Naval Architect</h3>
-                          <p className="text-portfolio-primary">Larsen & Toubro Shipbuilding</p>
-                          <p className="text-muted-foreground">Jul 2015 – May 2018 · Chennai</p>
-                        </div>
-                        <Badge variant="outline">2015-2018</Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Managed a team of 5 engineers for delivering engineering drawings</li>
-                    <li>Performed 3D Modelling of Hull Outfit and accommodation equipment in CADMATIC</li>
-                    <li>Prepared Engineering design and construction documents</li>
-                    <li>Coordinated with Customers, OEMs, vendors, and Classification Societies</li>
-                    <li>Preparation of budgetary Bill of Materials for cost estimation of new-bid projects</li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline">CADMATIC</Badge>
-                    <Badge variant="outline">3D Modeling</Badge>
-                    <Badge variant="outline">Team Leadership</Badge>
-                    <Badge variant="outline">Project Management</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* STICON */}
-              <Card className="hover:shadow-lg hover:scale-105 transition-all duration-300 rounded-lg shadow-md">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="bg-white dark:bg-white p-2 rounded-lg shadow-sm hover:scale-105 transition-transform duration-300">
-                      <img 
-                        src="/lovable-uploads/6b999f32-eb88-43e1-b37d-590083fc3548.png" 
-                        alt="STICON logo"
-                        className="w-8 h-8 object-contain filter dark:brightness-110 dark:contrast-110"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="font-semibold text-lg">Design Engineer</h3>
-                          <p className="text-portfolio-primary">STICON (Ship Tech Consultancy)</p>
-                          <p className="text-muted-foreground">Aug 2014 – May 2015</p>
-                        </div>
-                        <Badge variant="outline">2014-2015</Badge>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                    <li>Designed and tested houseboats for stability</li>
-                  </ul>
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    <Badge variant="outline">Ship Design</Badge>
-                    <Badge variant="outline">Stability Analysis</Badge>
-                  </div>
-                </CardContent>
-              </Card>
 
               {/* Internships */}
               <AnimatedCard className="rounded-xl border-0 shadow-lg" hoverEffect="lift">
@@ -952,9 +890,7 @@ const Index = () => {
             <div className="space-y-6 max-w-4xl mx-auto">
               {[
                 { degree: "MSc in Digital Engineering", university: "Bauhaus-Universität Weimar", years: "2022–2025", logo: "/lovable-uploads/8ebf8bd4-4ca8-4b63-bbbf-cbf12e8110a4.png" },
-                { degree: "MSc in Naval Architecture", university: "Universität Rostock", years: "2019–2020", logo: "/lovable-uploads/11ac1aa0-ffbb-42c3-ae8b-c32bb194e92d.png" },
-                { degree: "MSc in Mechanical Engineering", university: "Université de Liège", years: "2018–2019", logo: "/lovable-uploads/6ea10c40-7e98-446d-ad54-8aab66b544f8.png" },
-                { degree: "B.Tech in Naval Architecture", university: "CUSAT (Cochin University of Science and Technology)", years: "2011–2015", logo: "/lovable-uploads/33e7d5fe-aa9e-4cf6-9d51-bb4b9f87d30b.png" }
+                { degree: "B.Tech in Civil Engineering", university: "Muthoot Institute of Technology and Science", years: "2015–2019", logo: "/lovable-uploads/MITS-LOGO-NEW.jpeg" }
               ].map((edu, index) => (
                 <Card key={index} className="bg-slate-50 dark:bg-slate-800/50 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] rounded-xl border border-slate-200 dark:border-slate-700 shadow-lg">
                   <CardContent className="pt-6">
@@ -1078,7 +1014,7 @@ const Index = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
               {[
                 { lang: "English", level: "C1", desc: "Full Professional Proficiency", link: null },
-                { lang: "German", level: "B2", desc: "Professional Working Proficiency", link: "/lovable-uploads/08794a8f-1774-4962-8bf7-510c5dbb786a.png" },
+                { lang: "German", level: "A2", desc: "Elementary proficiency ", link: null },
                 { lang: "Malayalam", level: "Native", desc: "Native", link: null },
                 { lang: "Hindi", level: "B1", desc: "Intermediate", link: null },
                 { lang: "Tamil", level: "B1", desc: "Intermediate", link: null }
@@ -1196,7 +1132,7 @@ const Index = () => {
                     className="border-none rounded-xl"
                     style={{ border: 'none', overflow: 'hidden' }}
                     allowFullScreen
-                    title="Instagram Feed - Midhun's Photography"
+                    title="Instagram Feed - Isabel's Photography"
                   />
                 </div>
                 
@@ -1300,8 +1236,8 @@ const Index = () => {
                     <Mail className="h-5 w-5 text-portfolio-primary" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <a href="mailto:midhun.kunhikannan@gmail.com" className="text-muted-foreground hover:text-portfolio-primary">
-                        midhun.kunhikannan@gmail.com
+                      <a href="mailto:isabelmariavadakkedathu@gmail.com" className="text-muted-foreground hover:text-portfolio-primary">
+                        isabelmariavadakkedathu@gmail.com
                       </a>
                     </div>
                   </div>
@@ -1309,7 +1245,7 @@ const Index = () => {
                     <Phone className="h-5 w-5 text-portfolio-primary" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-muted-foreground">+49-17634462763</p>
+                      <p className="text-muted-foreground">+49-17646111026</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -1327,7 +1263,7 @@ const Index = () => {
                       </a>
                     </Button>
                     <Button variant="ghost" size="icon" asChild className="hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors">
-                      <a href="https://www.linkedin.com/in/midhunkanadan/" target="_blank" rel="noopener noreferrer">
+                      <a href="https://www.linkedin.com/in/isabel-maria-binu/" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="h-5 w-5 hover:text-blue-600 transition-colors" />
                       </a>
                     </Button>
@@ -1346,12 +1282,12 @@ const Index = () => {
         {/* Footer */}
         <footer className="bg-background dark:bg-gray-900 text-foreground py-8 px-4 border-t border-border">
           <div className="container mx-auto text-center">
-            <p className="mb-4">&copy; {new Date().getFullYear()} Midhun Kanadan. All rights reserved.</p>
+            <p className="mb-4">&copy; {new Date().getFullYear()} Isabel Maria Binu. All rights reserved.</p>
             <div className="flex justify-center gap-4">
               <a href="https://github.com/Midhun-Kanadan" className="hover:text-portfolio-accent transition-colors">
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/midhunkanadan/" className="hover:text-portfolio-accent transition-colors">
+              <a href="https://www.linkedin.com/in/isabel-maria-binu/" className="hover:text-portfolio-accent transition-colors">
                 LinkedIn
               </a>
               <a href="https://medium.com/@midhun.kunhikannan" className="hover:text-portfolio-accent transition-colors">
